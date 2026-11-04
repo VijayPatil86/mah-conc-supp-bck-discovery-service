@@ -2,6 +2,8 @@ server:
   port: 8761
 
 spring:
+  config:
+    import: optional:file:${SECRETS_DIR:C:/secure/mah-conc}/discovery.properties
   application:
     name: discovery-service
   security:
