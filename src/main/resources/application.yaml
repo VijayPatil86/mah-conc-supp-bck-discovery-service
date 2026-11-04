@@ -3,17 +3,17 @@ server:
 
 spring:
   config:
-    import: optional:file:${SECRETS_DIR:C:/secure/mah-conc}/discovery.properties
+    import: file:C:/secure/mah-conc/discovery-server.properties
   application:
     name: discovery-service
   security:
     user:
-      name: ${EUREKA_USER:eureka}
-      password: ${EUREKA_PASSWORD}          # no default: startup fails if it is not set
+      name: ${spring.security.user.name}
+      password: ${spring.security.user.password}          # no default: startup fails if it is not set
 
 eureka:
   instance:
-    hostname: ${EUREKA_HOST:localhost}
+    hostname: localhost
   client:
     register-with-eureka: false             # set true when you run two peers
     fetch-registry: false
