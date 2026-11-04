@@ -3,12 +3,39 @@ server:
 
 spring:
   application:
-    name: mah-conc-supp-discovery-server
+    name: discovery-service
+  security:
+    user:
+      name: ${EUREKA_USER:eureka}
+      password: ${EUREKA_PASSWORD}          # no default: startup fails if it is not set
+
 eureka:
   instance:
-    hostname: localhost
+    hostname: ${EUREKA_HOST:localhost}
   client:
-    register-with-eureka: false
+    register-with-eureka: false             # set true when you run two peers
     fetch-registry: false
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
+  server:
+    enable-self-preservation: true
+    eviction-interval-timer-in-ms: 30000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics
+  endpoint:
+    health:
+      show-details: never
+  health:
+    diskspace:
+      threshold: 1GB                        # health goes DOWN below this free space
+
+logging:
+  level:
+    root: INFO
+    com.netflix.eureka: WARN
+    com.netflix.discovery: WARN
+    com.netflix.eureka.registry.AbstractInstanceRegistry: INFO
+    com.netflix.eureka.registry.PeerAwareInstanceRegistryImpl: INFO
+    registry: INFO
