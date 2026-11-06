@@ -3,7 +3,7 @@
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
 
     <springProperty scope="context" name="APP" source="spring.application.name" defaultValue="discovery-service"/>
-    <springProperty scope="context" name="LOG_ROOT" source="LOG_DIR" defaultValue="C:/Users/Lenovo/logs/mah_conc_supp/"/>
+    <springProperty scope="context" name="LOG_ROOT" source="LOG_DIR" defaultValue="C:/Users/Lenovo/logs/mah_conc_supp"/>
 
     <property name="LOG_PATTERN"
               value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [${APP}] %logger{30} - %msg%n"/>
@@ -52,7 +52,7 @@
     <appender name="ASYNC_ERROR" class="ch.qos.logback.classic.AsyncAppender">
         <queueSize>512</queueSize>
         <discardingThreshold>0</discardingThreshold>
-        <neverBlock>true</neverBlock>
+        <neverBlock>false</neverBlock>
         <appender-ref ref="ERROR_FILE"/>
     </appender>
 
